@@ -411,22 +411,14 @@
       ]
     },
     "Path_Object": {
-      "description": "Path object. Usually used to target the Path key e.g. `/users/{userId}`",
+      "description": "",
       "targets": [
         {
           "formats": [
             "oas2"
           ],
           "given": [
-            "$.paths"
-          ]
-        },
-        {
-          "formats": [
-            "oas3"
-          ],
-          "given": [
-            "$.paths"
+            "$.info"
           ]
         }
       ]
@@ -547,6 +539,19 @@
           ]
         }
       ]
+    },
+    "Responses": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$..responses"
+          ]
+        }
+      ]
     }
   },
   "rules": {
@@ -578,7 +583,7 @@
       "given": [
         "#API_Document"
       ],
-      "severity": "warn",
+      "severity": "off",
       "then": {
         "function": "truthy",
         "field": "info.contact"
@@ -590,7 +595,7 @@
       "given": [
         "#API_Document"
       ],
-      "severity": "warn",
+      "severity": "off",
       "then": {
         "function": "truthy",
         "field": "info.description"
@@ -1239,6 +1244,51 @@
       "formats": [
         "oas3"
       ]
+    },
+    "query-parameters-camel-case": {
+      "given": [
+        "#Path_Object"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "casing",
+        "functionOptions": {
+          "type": "camel",
+          "disallowDigits": false,
+          "char": ""
+        },
+        "field": "name"
+      },
+      "description": "Query parameters must be camel case\n\n**Example: camelCase**",
+      "message": "Query parameter {{property}} must be camel case"
+    },
+    "header-parameters-snake-case": {
+      "given": [
+        "#Path_Object"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "schema",
+        "field": "name"
+      },
+      "description": "Header parameters must be camel case\n\n**Example: snakeCase**",
+      "message": "Header parameter {{property}} must be camel case"
+    },
+    "enforce-400": {
+      "given": [
+        "#Path_Object"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "length",
+        "functionOptions": {
+          "min": 1212,
+          "max": null
+        },
+        "field": "400"
+      },
+      "description": "Header parameters must be camel case\n\n**Example: snakeCase**",
+      "message": "{{path}} must have have 400 responsee"
     }
   },
   "functions": [
