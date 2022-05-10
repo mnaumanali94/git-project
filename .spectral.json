@@ -1288,7 +1288,7 @@
         "field": "400"
       },
       "description": "Header parameters must be camel case\n\n**Example: snakeCase**",
-      "message": "{{path}} must have have 400 responsee"
+      "message": "{{path}} must have have 400 responsees"
     }
   },
   "functions": [
