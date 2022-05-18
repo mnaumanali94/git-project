@@ -1,4 +1,1 @@
-./code
-# Ignore Spectral files
-.stoplight/custom-functions
 .spectral.json
